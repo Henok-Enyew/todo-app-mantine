@@ -1,28 +1,25 @@
 import { Box, Button, Checkbox, Flex, Group, Text } from '@mantine/core';
-
 // import { useForm } from '@mantine/form';
 
 // import classes from './Form.module.css';
+import useTaskStore from '../store/useTaskStore';
 
+type TaskType = {
+  id: number;
+  title: string;
+  isDone: boolean;
+};
+
+const styleDone = {
+  textDecoration: 'line-through',
+  opacity: '50%',
+};
 function Tasks() {
-  const tasks = [
-    { id: 1, title: 'Buy groceries', isDone: false },
-    { id: 2, title: 'Clean the house', isDone: true },
-    { id: 3, title: 'Finish homework', isDone: false },
-    { id: 4, title: 'Walk the dog', isDone: true },
-    { id: 5, title: 'Prepare lunch', isDone: false },
-    { id: 6, title: 'Pay bills', isDone: true },
-    { id: 7, title: 'Visit the gym', isDone: false },
-    { id: 8, title: 'Call mom', isDone: true },
-    { id: 9, title: 'Read a book', isDone: false },
-    { id: 10, title: 'Do laundry', isDone: true },
-  ];
-
-  //   const form = useForm({});
+  const { tasks, toggleTask, deleteTask } = useTaskStore();
 
   return (
     <Box maw={340} mx="auto" my={50}>
-      {tasks.map((task) => (
+      {tasks.map((task: TaskType) => (
         <Flex
           key={task.id}
           my={10}
@@ -33,16 +30,29 @@ function Tasks() {
           w="400"
         >
           <Group>
-            <Checkbox checked={task.isDone} color="rgb(217, 131, 38)" radius="xl" size="md" />
-            <Text size="lg">{task.title}</Text>
+            <Checkbox
+              checked={task.isDone}
+              color="rgb(217, 131, 38)"
+              radius="xl"
+              size="md"
+              onChange={() => toggleTask(task.id)}
+            />
+            <Text
+              size="lg"
+              onClick={() => toggleTask(task.id)}
+              style={task.isDone ? styleDone : {}}
+            >
+              {task.title}
+            </Text>
           </Group>
           <Button
             size="xs"
             radius="lg"
-            bg="rgba(217, 130, 38, 0.61)"
+            bg="rgba(217, 130, 38, 0.91)"
             p={4}
             variant="filled"
             justify="flex-end"
+            onClick={() => deleteTask(task.id)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,9 +61,9 @@ function Tasks() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               //   class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
