@@ -13,10 +13,16 @@ function Form() {
       task: (value) => (value.trim().length === 0 ? 'Task is required' : null),
     },
   });
-  const { addTask } = useTaskStore();
+  const { addTaskLocal } = useTaskStore();
+
   return (
     <Box maw={740} mx="auto" my={50}>
-      <form onSubmit={form.onSubmit((values) => addTask(values.task))}>
+      <form
+        onSubmit={form.onSubmit((values) => {
+          addTaskLocal(values.task);
+          form.reset();
+        })}
+      >
         <Group justify="center" align="center" dir="row">
           <TextInput
             // className={classes.input}

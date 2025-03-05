@@ -1,38 +1,43 @@
 import { create } from 'zustand';
+import { addTask, deleteTask, toggleTask } from '../../api';
 
 type Task = {
   id: number;
   title: string;
-  isDone: boolean;
+  is_done: boolean;
 };
 
 type TaskStore = {
   tasks: Task[];
-  addTask: (title: string) => void;
-  toggleTask: (id: number) => void;
-  deleteTask: (id: number) => void;
+  addTaskLocal: (title: string) => void;
+  toggleTaskLocal: (id: number) => void;
+  deleteTaskLocal: (id: number) => void;
+  setTasks: (tasks: Task[]) => void;
 };
 
 const useTaskStore = create<TaskStore>((set) => ({
-  tasks: [
-    { id: 3, title: 'Finish homework', isDone: false },
-    { id: 7, title: 'Visit the gym', isDone: false },
-    { id: 8, title: 'Call mom', isDone: true },
-  ],
-  addTask: (title: string) =>
+  tasks: [],
+  addTaskLocal: async (title: string) => {
+    const newTask = await addTask({ title });
     set((state) => ({
-      tasks: [{ id: Date.now(), title, isDone: false }, ...state.tasks],
-    })),
-  deleteTask: (id: number) =>
+      tasks: [newTask, ...state.tasks],
+    }));
+  },
+  deleteTaskLocal: async (id: number) => {
+    await deleteTask(id);
     set((state) => ({
       tasks: state.tasks.filter((task: Task) => task.id !== id),
-    })),
-  toggleTask: (id: number) =>
+    }));
+  },
+  toggleTaskLocal: async (id: number) => {
+    await toggleTask(id);
     set((state) => ({
       tasks: state.tasks.map((task: Task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task
+        task.id === id ? { ...task, is_done: !task.is_done } : task
       ),
-    })),
+    }));
+  },
+  setTasks: (tasks: Task[]) => set({ tasks }),
 }));
 
 export default useTaskStore;
