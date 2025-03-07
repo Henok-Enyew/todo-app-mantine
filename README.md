@@ -30,7 +30,6 @@ This is the frontend for a simple Todo application built with React, Mantine (fo
 ## State Management (Zustand)
 
 This app uses Zustand to manage the tasks state globally.
-
 The tasks are stored and updated in Zustand, and any changes trigger a re-render of the components that use the tasks state.
 
 ### Store (`src/store/useTaskStore.js`)
@@ -42,4 +41,4 @@ The tasks state is updated directly after each action to keep the frontend in sy
 
 ## UI (Mantine)
 
-The app uses Mantine for UI components. Mantine offers a rich set of components like buttons, modals, inputs, and more. To customize or add components, you can explore the [Mantine documentation](https://mantine.dev/).
+The app uses Mantine for UI components. Mantine offers a rich set of components like buttons, modals, inputs, and more. To customize or add components, you can also explore the [Mantine documentation](https://mantine.dev/).
