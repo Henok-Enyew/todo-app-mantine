@@ -1,34 +1,44 @@
-# Mantine Vite template
+---
 
-## Features
+### **Frontend - React Todo App (Mantine + Zustand)**
 
-This template comes with the following features:
+````markdown
+# Frontend - React Todo App
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Vitest](https://vitest.dev/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+This is the frontend for a simple Todo application built with React, Mantine (for UI), and Zustand (for state management). The app connects to the Django API to perform CRUD operations on tasks.
 
-## npm scripts
+## Prerequisites
 
-## Build and dev scripts
+- Node.js (v18+)
+- npm or yarn (for package management)
 
-- `dev` – start development server
-- `build` – build production version of the app
-- `preview` – locally preview production build
+## Installation
 
-### Testing scripts
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/frontend-todo-app.git
+   cd frontend-todo-app
+   ```
+2. **Install dependencies:**:
+   ```bash
+    yarn install
+   ```
+3. **Start the app**:
+   ```bash
+    yarn dev
+   ```
+## State Management (Zustand)
 
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `vitest` – runs vitest tests
-- `vitest:watch` – starts vitest watch
-- `test` – runs `vitest`, `prettier:check`, `lint` and `typecheck` scripts
+This app uses Zustand to manage the tasks state globally.
+The tasks are stored and updated in Zustand, and any changes trigger a re-render of the components that use the tasks state.
 
-### Other scripts
+### Store (`src/store/useTaskStore.js`)
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+The store defines actions for fetching tasks, adding tasks, deleting tasks, and toggling task completion.  
+The tasks state is updated directly after each action to keep the frontend in sync with the backend.
+
+---
+
+## UI (Mantine)
+
+The app uses Mantine for UI components. Mantine offers a rich set of components like buttons, modals, inputs, and more. To customize or add components, you can also explore the [Mantine documentation](https://mantine.dev/).
