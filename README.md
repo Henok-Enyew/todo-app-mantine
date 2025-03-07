@@ -2,7 +2,7 @@
 
 ### **Frontend - React Todo App (Mantine + Zustand)**
 
-````markdown
+
 # Frontend - React Todo App
 
 This is the frontend for a simple Todo application built with React, Mantine (for UI), and Zustand (for state management). The app connects to the Django API to perform CRUD operations on tasks.
